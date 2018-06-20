@@ -280,8 +280,13 @@ DWORD time1()                          //核心部分，鼠标的按键计时
 		case WM_LBUTTONUP:
 			t2 = timeGetTime();
 			mciSendString("close music2", 0, 0, 0);
-			if (t2 - t1 >100)                                //防止对于鼠标按键的检测不够灵敏，有可能出现按键没有被检测到，图片只跳了极短的距离
-				return t2 - t1;
+			if (t2 - t1 >100) 
+			        {   
+				if (t2-t1<5000)
+					return t2 - t1;
+				else
+					return 0;
+				   }
 			else
 				break;
 		}
